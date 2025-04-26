@@ -1,0 +1,2 @@
+class RoundOption < ApplicationRecord
+end
