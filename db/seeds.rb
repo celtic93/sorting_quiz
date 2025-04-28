@@ -26,15 +26,29 @@ p 'Questions created sucessfully'
 
 p 'Creating round'
 round = Round.create
-rq1 = round.round_questions.create(question_id: q1.id)
-rq1.round_options.create(position: 1, option_id: o12.id, correct_position: 1, correct: true, score: 0)
+rq1 = round.round_questions.create(question_id: q1.id, position: 2)
+rq1.round_options.create(
+  position: 1,
+  option_id: o12.id,
+  correct_position: 1,
+  user_position: 1,
+  correct: true,
+  score: 0
+)
 rq1.round_options.create(position: 2, option_id: o15.id, correct_position: 2)
 rq1.round_options.create(position: 3, option_id: o11.id, correct_position: 1)
 rq1.round_options.create(position: 4, option_id: o14.id, correct_position: 3)
 rq1.round_options.create(position: 5, option_id: o13.id, correct_position: 3)
 
-rq2 = round.round_questions.create(question_id: q2.id)
-rq2.round_options.create(position: 1, option_id: o25.id, correct_position: 1, correct: true, score: 0)
+rq2 = round.round_questions.create(question_id: q2.id, position: 1)
+rq2.round_options.create(
+  position: 1,
+  option_id: o25.id,
+  correct_position: 1,
+  user_position: 1,
+  correct: true,
+  score: 0
+)
 rq2.round_options.create(position: 2, option_id: o23.id, correct_position: 1)
 rq2.round_options.create(position: 3, option_id: o21.id, correct_position: 1)
 rq2.round_options.create(position: 4, option_id: o22.id, correct_position: 2)

@@ -46,6 +46,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_175833) do
   create_table "round_questions", comment: "Join table for Rounds and Questions", force: :cascade do |t|
     t.bigint "round_id", comment: "Belongs to Round"
     t.bigint "question_id", comment: "Belongs to Question"
+    t.integer "position", comment: "Defines the order in which the Question is shown in Round"
+    t.boolean "done", default: false, comment: "Becomes true when all players give all answers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_round_questions_on_question_id"
