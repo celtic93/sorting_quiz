@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "home#index"
+
   defaults format: :json do
     resource :current_round_questions, only: %i[show]
   end
