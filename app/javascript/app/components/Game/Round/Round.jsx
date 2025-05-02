@@ -10,6 +10,7 @@ const Round = () => {
     queryKey: ['сurrentRoundQuestion'],
     queryFn: getCurrentRoundQuestion,
     staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 
   const [question, setQuestion] = useState(null);
