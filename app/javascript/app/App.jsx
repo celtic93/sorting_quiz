@@ -1,11 +1,8 @@
 import React from 'react';
+import Round from './components/Game/Round';
 
 const App = () => {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
+  return <Round />;
 };
 
 export default App;
