@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { useQuery } from '@tanstack/react-query';
-import { getCurrentRoundQuestion } from '../../../api/api';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { getCurrentRoundQuestion, updateRoundOption } from '../../../api/api';
 import RoundAnswers from '../RoundAnswers';
 import RoundOption from '../RoundOption';
 
@@ -25,13 +25,35 @@ const Round = () => {
     }
   }, [data]);
 
+  const mutation = useMutation({
+    mutationFn: updateRoundOption,
+    onSuccess: (returnedData) => {
+      console.log('useMutation onSuccess returnedData', returnedData)
+      // Предполагаем, что returnedData содержит correct_position
+      const {
+        round_option,
+        round_option: {
+          correct_position
+        },
+        next_option
+      } = returnedData;
+      console.log('useMutation onSuccess returnedData', round_option)
+
+      // Добавляем новый элемент в массив answers на позицию correct_position
+      setAnswers((prevAnswers) => {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers.splice(correct_position - 1, 0, round_option); // Вставляем элемент на нужную позицию
+        return updatedAnswers;
+      });
+      setCurrentOption(next_option);
+    },
+  });
+
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
-    const newAnswers = Array.from(answers);
-    const [movedItem] = newAnswers.splice(result.source.index, 1);
-    newAnswers.splice(result.destination.index, 0, movedItem);
-    setAnswers(newAnswers);
+    const params = { round_option: { user_position: result.destination.index + 1 } }
+    mutation.mutate({ id: result.draggableId, params });
   };
 
   // Обработка состояния загрузки и ошибки

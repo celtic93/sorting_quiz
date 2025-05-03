@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   defaults format: :json do
     resource :current_round_questions, only: %i[show]
+    resources :round_options, only: %i[update]
   end
 end
